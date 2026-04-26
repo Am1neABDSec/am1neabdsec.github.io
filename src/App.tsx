@@ -6,14 +6,14 @@ import "/assets/css/particles.css";
 
 const App: React.FC = () => {
   useEffect(() => {
-    // Logic for the animated counters (Accolades Section)
+    // This makes the numbers (0+) count up to their target
     const counters = document.querySelectorAll('[data-counter-target]');
     
     counters.forEach(counter => {
       const target = +counter.getAttribute('data-counter-target')!;
       const updateCount = () => {
         const current = +counter.innerHTML;
-        const increment = target / 100; // Adjust speed here
+        const increment = target / 100;
 
         if (current < target) {
           counter.innerHTML = `${Math.ceil(current + increment)}`;
@@ -30,7 +30,7 @@ const App: React.FC = () => {
     <>
       <Nav />
       <main id="home" className="w-full">
-        {/* Floating light elements */}
+        {/* Animated Background Lights */}
         <div className="light x1"></div>
         <div className="light x2"></div>
         <div className="light x3"></div>
@@ -52,14 +52,11 @@ const App: React.FC = () => {
                 </span>
               </h1>
               <p className="max-w-2xl mb-6 font-bold text-gray-500 lg:mb-8 text-3xl dark:text-gray-400">
-                From deep-dive penetration testing to proactive threat monitoring, I provide tailored solutions to secure your network and protect your business.
+                From deep-dive penetration testing to proactive threat monitoring, I provide tailored solutions to protect your business.
               </p>
               <div className="flex flex-wrap gap-4">
-                <a href="#about" className="inline-flex items-center justify-center px-5 py-3 text-base font-medium text-center text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 dark:focus:ring-green-900 transition-colors">
+                <a href="#about" className="inline-flex items-center justify-center px-5 py-3 text-base font-medium text-center text-white bg-green-700 hover:bg-green-800 transition-colors rounded-lg">
                   More About Me
-                  <svg className="w-5 h-5 ml-2 -mr-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                    <path fillRule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clipRule="evenodd" />
-                  </svg>
                 </a>
                 <a href="#contact" className="inline-flex items-center justify-center px-5 py-3 text-base font-medium text-center text-gray-900 border-4 border-green-300 hover:bg-green-100 dark:text-white dark:border-green-700 dark:hover:bg-green-700">
                   Contact Me!
@@ -67,25 +64,86 @@ const App: React.FC = () => {
               </div>
             </div>
             <div id="hacker-logo" className="lg:mt-0 lg:col-span-5 lg:flex relative z-10">
-              <img src="/assets/images/hacker.png" alt="hacker illustration" className="w-full h-auto" />
+              <img 
+                src="/assets/images/hacker.png" 
+                alt="hacker" 
+                className="w-full h-auto"
+                style={{ opacity: 1 }} 
+              />
             </div>
           </div>
         </section>
 
         {/* #### ACCOLADES SECTION #### */}
         <section className="bg-white dark:bg-black">
-          <div className="max-w-screen-xl px-4 py-8 mx-auto text-center lg:py-28 lg:px-6 border-4 border-solid border-green-700 relative z-20 bg-white dark:bg-black">
+          <div className="max-w-screen-xl px-4 py-8 mx-auto text-center lg:py-28 lg:px-6 border-4 border-solid border-green-700 relative z-20">
             <dl className="grid max-w-screen-md gap-8 mx-auto text-gray-900 sm:grid-cols-3 dark:text-white">
               <div className="flex flex-col items-center justify-center">
                 <dt className="mb-2 text-5xl md:text-7xl font-extrabold">
                   <span data-counter-target="20">0</span>+
                 </dt>
-                <dd className="font-light text-2xl text-gray-500 dark:text-gray-400">Years of Experience</dd>
+                <dd className="font-light text-2xl text-gray-500 dark:text-gray-400">Years Experience</dd>
               </div>
               <div className="flex flex-col items-center justify-center">
                 <dt className="mb-2 text-5xl md:text-7xl font-extrabold">
                   <span data-counter-target="300">0</span>+
                 </dt>
-                <dd className="font-light text-2xl text-gray-500 dark:text-gray-400">Engagements Completed</dd>
+                <dd className="font-light text-2xl text-gray-500 dark:text-gray-400">Engagements</dd>
               </div>
-              <div className="flex flex-col items-center justify-center
+              <div className="flex flex-col items-center justify-center">
+                <dt className="mb-2 text-5xl md:text-7xl font-extrabold">
+                  <span data-counter-target="10000">0</span>
+                </dt>
+                <dd className="font-light text-2xl text-gray-500 dark:text-gray-400">Cups of Coffee</dd>
+              </div>
+            </dl>
+          </div>
+        </section>
+
+        {/* #### SERVICES SECTION #### */}
+        <section id="services" className="pt-8 pb-12 bg-white dark:bg-black">
+          <div className="py-8 px-4 mx-auto max-w-screen-xl text-center">
+            <h2 className="mb-4 text-4xl font-extrabold text-gray-900 dark:text-white">Breaking Systems, Building Security</h2>
+            <div className="grid md:grid-cols-3 gap-12 mt-12">
+              <div className="p-4 hover:scale-105 transition-transform">
+                <h3 className="text-2xl font-bold dark:text-white">Penetration Testing</h3>
+                <p className="text-gray-500 dark:text-gray-400">Simulating real-world attacks to find gaps.</p>
+              </div>
+              <div className="p-4 hover:scale-105 transition-transform">
+                <h3 className="text-2xl font-bold dark:text-white">Web App Security</h3>
+                <p className="text-gray-500 dark:text-gray-400">In-depth analysis of your web platforms.</p>
+              </div>
+              <div className="p-4 hover:scale-105 transition-transform">
+                <h3 className="text-2xl font-bold dark:text-white">Security Training</h3>
+                <p className="text-gray-500 dark:text-gray-400">Educating teams on defensive tactics.</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* #### PROFESSIONAL SECTION #### */}
+        <section id="professional" className="py-16 bg-white dark:bg-black border-y-4 border-green-700">
+          <div className="max-w-screen-xl px-4 mx-auto grid md:grid-cols-2 gap-12">
+            <div>
+              <h2 className="text-3xl font-extrabold text-green-500 mb-6 font-mono">01_EXPERIENCE</h2>
+              <div className="border-l-2 border-green-500 pl-4">
+                <h3 className="text-xl font-bold dark:text-white">Security Researcher</h3>
+                <p className="text-gray-500 dark:text-gray-400">Freelance / Pentesting</p>
+              </div>
+            </div>
+            <div>
+              <h2 className="text-3xl font-extrabold text-green-500 mb-6 font-mono">02_CERTIFICATIONS</h2>
+              <ul className="space-y-2 dark:text-white font-mono">
+                <li>▶ PJPT - Practical Junior PenTester</li>
+                <li>▶ NSE 1, 2, 3 - Fortinet Expert</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+      </main>
+      <Footer />
+    </>
+  );
+};
+
+export default App;
