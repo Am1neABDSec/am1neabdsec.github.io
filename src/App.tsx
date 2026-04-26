@@ -2,178 +2,177 @@ import React, { useEffect } from "react";
 
 const App: React.FC = () => {
   useEffect(() => {
-    const canvas = document.getElementById('matrix-canvas') as HTMLCanvasElement;
+    // Subtle background animation
+    const canvas = document.getElementById('bg-dots') as HTMLCanvasElement;
     if (canvas) {
       const ctx = canvas.getContext('2d');
       if (ctx) {
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
-        const letters = "01010101010101010101";
-        const fontSize = 14;
-        const columns = canvas.width / fontSize;
-        const drops: number[] = [];
-        for (let i = 0; i < columns; i++) drops[i] = 1;
-
         const draw = () => {
-          ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
-          ctx.fillRect(0, 0, canvas.width, canvas.height);
-          ctx.fillStyle = "#22c55e";
-          ctx.font = fontSize + "px monospace";
-          for (let i = 0; i < drops.length; i++) {
-            const text = letters.charAt(Math.floor(Math.random() * letters.length));
-            ctx.fillText(text, i * fontSize, drops[i] * fontSize);
-            if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) drops[i] = 0;
-            drops[i]++;
+          ctx.clearRect(0, 0, canvas.width, canvas.height);
+          ctx.fillStyle = "rgba(34, 197, 94, 0.2)";
+          for (let i = 0; i < 50; i++) {
+            const x = Math.random() * canvas.width;
+            const y = Math.random() * canvas.height;
+            ctx.fillRect(x, y, 2, 2);
           }
         };
-        const interval = setInterval(draw, 33);
-        return () => clearInterval(interval);
+        setInterval(draw, 200);
       }
     }
   }, []);
 
   return (
-    <div className="min-h-screen bg-black text-white font-mono selection:bg-green-500 selection:text-black overflow-x-hidden">
-      {/* FX LAYERS */}
-      <canvas id="matrix-canvas" className="fixed inset-0 opacity-[0.15] z-0 pointer-events-none"></canvas>
-      <div className="fixed inset-0 pointer-events-none z-[9999] opacity-[0.05] bg-[linear-gradient(rgba(18,16,16,0)_50%,rgba(0,0,0,0.25)_50%),linear-gradient(90deg,rgba(255,0,0,0.06),rgba(0,255,0,0.02),rgba(0,0,255,0.06))] bg-[length:100%_2px,3px_100%]"></div>
+    <div className="min-h-screen bg-[#050505] text-zinc-100 font-sans selection:bg-green-500 selection:text-black">
+      <canvas id="bg-dots" className="fixed inset-0 pointer-events-none opacity-30"></canvas>
 
-      {/* NAV */}
-      <nav className="fixed top-0 w-full z-[100] bg-black/90 backdrop-blur-md border-b border-green-500/20 px-8 py-6">
-        <div className="max-w-7xl mx-auto flex justify-between items-center">
-          <div className="flex items-center gap-3">
-            <div className="h-2 w-2 bg-green-500 rounded-full animate-ping shadow-[0_0_10px_#22c55e]"></div>
-            <span className="text-xl font-black tracking-tighter text-green-500 uppercase italic">AM1NE_SEC</span>
+      {/* STICKY NAV */}
+      <nav className="fixed top-0 w-full z-[100] bg-black/80 backdrop-blur-xl border-b border-white/5 px-6 py-4">
+        <div className="max-w-6xl mx-auto flex justify-between items-center">
+          <div className="flex items-center gap-2">
+            <div className="w-3 h-3 bg-green-500 rounded-full shadow-[0_0_10px_#22c55e]"></div>
+            <span className="font-bold tracking-widest text-sm">AM1NE_SEC</span>
           </div>
-          <div className="hidden lg:flex gap-8 text-[10px] tracking-[0.3em] font-bold text-zinc-500 uppercase">
-            <a href="#about" className="hover:text-green-400 transition-all">BIOS</a>
-            <a href="#services" className="hover:text-green-400 transition-all">SERVICES</a>
-            <a href="#experience" className="hover:text-green-400 transition-all">LOGS</a>
-            <a href="#education" className="hover:text-green-400 transition-all">INTEL</a>
-            <a href="#projects" className="hover:text-green-400 transition-all">PROJECTS</a>
-            <a href="#contact" className="hover:text-green-400 transition-all">SIGNAL</a>
+          <div className="hidden md:flex gap-8 text-[11px] font-semibold tracking-widest text-zinc-400">
+            <a href="#about" className="hover:text-green-500 transition-colors">ABOUT</a>
+            <a href="#experience" className="hover:text-green-500 transition-colors">EXPERIENCE</a>
+            <a href="#skills" className="hover:text-green-500 transition-colors">SKILLS</a>
+            <a href="#contact" className="hover:text-green-500 transition-colors underline underline-offset-8 decoration-green-500">HIRE ME</a>
           </div>
         </div>
       </nav>
 
-      <main className="relative z-10 max-w-7xl mx-auto px-6 pt-48 pb-32 space-y-48">
-        {/* 1. BIOS (ABOUT) */}
-        <section id="about" className="grid lg:grid-cols-2 gap-16 items-center">
-          <div className="space-y-10">
-            <div className="inline-block px-4 py-1 border border-green-500/30 bg-green-500/10 text-green-500 text-[10px] tracking-widest uppercase rounded-sm font-bold">// STATUS: OFFENSIVE_ACTIVE</div>
-            <h1 className="text-8xl lg:text-[130px] font-black leading-[0.7] tracking-tighter uppercase italic">CYBER<br/><span className="text-green-500">STRATEGY.</span></h1>
-            <p className="text-zinc-400 text-lg max-w-md border-l-2 border-green-600 pl-8 leading-relaxed italic">Mohamed Amine Abdelouafi. Pentester spécialisé en Active Directory et fondateur de CypherCode Académie.</p>
-            <div className="flex gap-4 pt-6">
-              <a href="#contact" className="bg-green-600 text-black px-12 py-5 font-black hover:bg-green-400 transition-all shadow-[0_0_30px_rgba(34,197,94,0.3)] text-xs uppercase tracking-widest">INIT_CONTACT</a>
+      <main className="relative z-10 max-w-6xl mx-auto px-6">
+        
+        {/* HERO SECTION */}
+        <section id="about" className="pt-40 pb-24 grid lg:grid-cols-12 gap-12 items-center">
+          <div className="lg:col-span-7 space-y-8">
+            <div className="space-y-2">
+              <h2 className="text-green-500 font-mono text-sm tracking-[0.3em] font-bold">PENTESTER & SECURITY AUDITOR</h2>
+              <h1 className="text-6xl md:text-8xl font-black tracking-tighter leading-none">
+                MOHAMED AMINE <span className="text-zinc-500">ABDELOUAFI</span>
+              </h1>
+            </div>
+            <p className="text-xl text-zinc-400 max-w-2xl leading-relaxed font-light">
+              Specializing in <span className="text-white font-medium">Active Directory Exploitation</span> and infrastructure hardening. I bridge the gap between complex offensive security and executive-level strategic reporting.
+            </p>
+            <div className="flex flex-wrap gap-4">
+              <a href="#contact" className="bg-white text-black px-8 py-4 font-bold text-sm hover:bg-green-500 transition-all rounded-full shadow-xl">WORK WITH ME</a>
+              <div className="flex items-center gap-3 px-6 py-4 border border-white/10 rounded-full text-xs font-bold text-zinc-400">
+                <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
+                AVAILABLE FOR FREELANCE OPS
+              </div>
             </div>
           </div>
-          <div className="relative group">
-            <div className="absolute -inset-10 bg-green-500/10 blur-[100px] rounded-full"></div>
-            <div className="relative border border-zinc-800 bg-zinc-950 p-3 rounded-lg shadow-2xl">
-              <img src="hacker.png" alt="Amine" className="w-full h-auto grayscale group-hover:grayscale-0 transition-all duration-1000" onError={(e) => { e.currentTarget.src = "https://img.icons8.com/ios-filled/500/22c55e/security-checked.png" }} />
-              <div className="absolute bottom-6 right-6 bg-black/90 px-4 py-2 border border-green-500/50 text-[9px] text-green-500 tracking-widest font-bold uppercase italic">Operative_ID: AM1NE_SEC</div>
+          <div className="lg:col-span-5 relative group">
+            <div className="absolute -inset-1 bg-green-500/20 blur-2xl rounded-full opacity-0 group-hover:opacity-100 transition-opacity"></div>
+            <div className="relative aspect-square rounded-3xl overflow-hidden border border-white/10 bg-zinc-900">
+              <img 
+                src="hacker.png" 
+                alt="Amine Abdelouafi" 
+                className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700"
+                onError={(e) => { e.currentTarget.src = "https://cdn-icons-png.flaticon.com/512/3135/3135715.png" }}
+              />
             </div>
           </div>
         </section>
 
-        {/* 2. SERVICES */}
-        <section id="services" className="space-y-16">
-          <h2 className="text-5xl font-black italic tracking-tighter text-green-500 uppercase border-b border-zinc-900 pb-4">02_CAPABILITIES</h2>
+        {/* EXPERIENCE SECTION - DIRECT FROM CV */}
+        <section id="experience" className="py-24 border-t border-white/5 space-y-16">
+          <div className="flex items-baseline gap-4">
+            <h2 className="text-4xl font-black italic">01_EXPERIENCE</h2>
+            <div className="h-px flex-1 bg-white/5"></div>
+          </div>
+          <div className="grid gap-12">
+            {/* M-SECURE */}
+            <div className="group grid md:grid-cols-4 gap-4">
+              <div className="text-zinc-500 font-mono text-sm">2025 — PRESENT</div>
+              <div className="md:col-span-3 space-y-4">
+                <h3 className="text-2xl font-bold group-hover:text-green-500 transition-colors">Consultant en Cybersécurité @ M-SECURE CONSULTING</h3>
+                <p className="text-zinc-400 leading-relaxed italic">
+                  Pentesting Active Directory (Kerberoasting, SMB Relay, LLMNR/NBT-NS Poisoning). 
+                  Accompagnement de grands acteurs du transport et de la logistique.
+                </p>
+                <div className="flex flex-wrap gap-2 text-[10px] font-bold tracking-widest text-green-500">
+                  <span className="px-3 py-1 border border-green-500/30 rounded-full uppercase">AD_Exploit</span>
+                  <span className="px-3 py-1 border border-green-500/30 rounded-full uppercase">Nmap/Nessus</span>
+                  <span className="px-3 py-1 border border-green-500/30 rounded-full uppercase">Reporting</span>
+                </div>
+              </div>
+            </div>
+            {/* TELUS */}
+            <div className="group grid md:grid-cols-4 gap-4 opacity-70 hover:opacity-100 transition-opacity">
+              <div className="text-zinc-500 font-mono text-sm">MAY — OCT 2025</div>
+              <div className="md:col-span-3 space-y-4">
+                <h3 className="text-2xl font-bold">Tech Support L2 @ TELUS Digital</h3>
+                <p className="text-zinc-400 leading-relaxed">
+                  Sécurisation IoT (Caméras IP, Serrures connectées) et durcissement des Telus Boosters. 
+                  Optimisation de la couverture Wi-Fi pour flux de sécurité critiques.
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* SKILLS GRID */}
+        <section id="skills" className="py-24 border-t border-white/5 space-y-16">
+          <div className="flex items-baseline gap-4">
+            <h2 className="text-4xl font-black italic">02_SKILLS_CORE</h2>
+            <div className="h-px flex-1 bg-white/5"></div>
+          </div>
           <div className="grid md:grid-cols-3 gap-6">
-            <div className="p-10 border border-zinc-900 bg-zinc-950/50 hover:border-green-500 transition-all">
-              <h3 className="text-2xl font-bold mb-4 uppercase italic">Pentesting AD</h3>
-              <p className="text-zinc-500 text-sm font-light">Exploitation Kerberos, SMB Relay et élévation de privilèges BloodHound.</p>
+            <div className="p-8 border border-white/5 bg-zinc-900/50 rounded-2xl hover:border-green-500/50 transition-all">
+              <h4 className="text-green-500 font-bold mb-4 uppercase tracking-tighter">Offensive</h4>
+              <ul className="text-zinc-400 space-y-2 text-sm">
+                <li>• Kerberoasting & SMB Relay</li>
+                <li>• BloodHound Privilege Escalation</li>
+                <li>• OSINT & Reconnaissance</li>
+              </ul>
             </div>
-            <div className="p-10 border border-zinc-900 bg-zinc-950/50 hover:border-green-500 transition-all">
-              <h3 className="text-2xl font-bold mb-4 uppercase italic">Audits Vulns</h3>
-              <p className="text-zinc-500 text-sm font-light">Validation d'impact critique avec rapports stratégiques pour top management.</p>
+            <div className="p-8 border border-white/5 bg-zinc-900/50 rounded-2xl hover:border-green-500/50 transition-all">
+              <h4 className="text-green-500 font-bold mb-4 uppercase tracking-tighter">Defense</h4>
+              <ul className="text-zinc-400 space-y-2 text-sm">
+                <li>• Vulnerability Scans (Nessus)</li>
+                <li>• IoT Hardening (MAC Filtering)</li>
+                <li>• Network Hardening (Cisco)</li>
+              </ul>
             </div>
-            <div className="p-10 border border-zinc-900 bg-zinc-950/50 hover:border-green-500 transition-all">
-              <h3 className="text-2xl font-bold mb-4 uppercase italic">IoT Hardening</h3>
-              <p className="text-zinc-500 text-sm font-light">Sécurisation d'équipements intelligents et optimisation des flux réseau.</p>
-            </div>
-          </div>
-        </section>
-
-        {/* 3. LOGS (EXPERIENCE) */}
-        <section id="experience" className="space-y-16">
-          <h2 className="text-5xl font-black italic tracking-tighter uppercase border-b border-zinc-900 pb-4 text-green-500">03_DEPLOYMENT_LOGS</h2>
-          <div className="space-y-20">
-            <div className="relative pl-12 border-l-2 border-green-500">
-              <div className="absolute -left-[9px] top-0 h-4 w-4 bg-green-500 shadow-[0_0_20px_#22c55e]"></div>
-              <span className="text-green-500 text-[10px] tracking-[0.3em] font-bold uppercase">2025 - PRESENT</span>
-              <h3 className="text-4xl font-black italic uppercase mt-3">Consultant Cybersécurité</h3>
-              <p className="text-zinc-400 text-lg mb-6 uppercase tracking-tighter">M-SECURE CONSULTING (Freelance)</p>
-              <p className="text-zinc-500 text-sm italic">Accompagnement d'acteurs de la logistique dans l'audit de leurs environnements AD et cloud.</p>
-            </div>
-            <div className="relative pl-12 border-l-2 border-zinc-800">
-              <div className="absolute -left-[9px] top-0 h-4 w-4 bg-zinc-800"></div>
-              <span className="text-zinc-600 text-[10px] tracking-[0.3em] font-bold uppercase">MAY - OCT 2025</span>
-              <h3 className="text-4xl font-black italic uppercase mt-3 text-zinc-500">Tech Support L2</h3>
-              <p className="text-zinc-600 text-lg mb-4 uppercase italic">TELUS Digital</p>
-              <p className="text-zinc-500 text-sm italic">Hardening de dispositifs de sécurité IoT et troubleshooting infrastructure réseau.</p>
+            <div className="p-8 border border-white/5 bg-zinc-900/50 rounded-2xl hover:border-green-500/50 transition-all">
+              <h4 className="text-green-500 font-bold mb-4 uppercase tracking-tighter">Academia</h4>
+              <ul className="text-zinc-400 space-y-2 text-sm">
+                <li>• Licence Pro RSS (AUPS Maroc)</li>
+                <li>• PJPT & Security+</li>
+                <li>• CypherCode Académie Founder</li>
+              </ul>
             </div>
           </div>
         </section>
 
-        {/* 4. INTEL (EDUCATION) */}
-        <section id="education" className="grid lg:grid-cols-2 gap-10">
-          <div className="p-10 border border-zinc-900 bg-zinc-950/80">
-            <h2 className="text-3xl font-black mb-10 italic uppercase border-l-4 border-green-500 pl-4">Intel_Academic</h2>
-            <div className="space-y-8">
-              <div>
-                <h4 className="text-xl font-bold text-green-500 uppercase">Licence Pro RSS</h4>
-                <p className="text-zinc-500 text-[10px] font-bold uppercase mt-1">AUPS MAROC | 2025-2026</p>
-              </div>
-              <div className="opacity-40">
-                <h4 className="text-xl font-bold text-zinc-300 uppercase">Licence Gestion</h4>
-                <p className="text-zinc-500 text-[10px] font-bold uppercase mt-1">FSJES AIN CHOCK | 2023-2026</p>
-              </div>
+        {/* CONTACT / CALL TO ACTION */}
+        <section id="contact" className="py-32">
+          <div className="bg-white text-black rounded-[3rem] p-12 md:p-24 text-center space-y-10 shadow-[0_0_50px_rgba(255,255,255,0.1)]">
+            <h2 className="text-5xl md:text-8xl font-black tracking-tighter uppercase italic">Ready to secure?</h2>
+            <p className="text-xl max-w-2xl mx-auto font-medium">
+              Establish a secure signal for partnerships, audits, or consulting.
+            </p>
+            <div className="flex flex-col md:flex-row gap-6 justify-center items-center">
+              <a href="mailto:aminetechtalks@gmail.com" className="text-2xl font-black hover:text-green-600 transition-colors">aminetechtalks@gmail.com</a>
+              <span className="hidden md:block w-2 h-2 bg-black rounded-full"></span>
+              <a href="tel:+212701103141" className="text-2xl font-black hover:text-green-600 transition-colors">+212 701 10 31 41</a>
             </div>
-          </div>
-          <div className="p-10 border border-zinc-900 bg-green-600 text-black">
-            <h2 className="text-3xl font-black mb-10 italic uppercase tracking-tighter">Credentials</h2>
-            <div className="grid grid-cols-2 gap-4 font-black text-[10px] uppercase">
-              <div className="p-5 border-2 border-black/20 bg-white/10">PJPT (TCM)</div>
-              <div className="p-5 border-2 border-black/20 bg-white/10">SECURITY+</div>
-              <div className="p-5 border-2 border-black/20 bg-white/10">NSE 3 FORTINET</div>
-              <div className="p-5 border-2 border-black/20 bg-white/10">CCNA R&S</div>
+            <div className="pt-10 flex justify-center gap-8 text-xs font-black tracking-[0.3em] opacity-40 uppercase">
+              <span>Linkedin</span>
+              <span>Github</span>
+              <span>Youtube</span>
             </div>
           </div>
         </section>
 
-        {/* 5. PROJECTS */}
-        <section id="projects" className="space-y-16">
-          <h2 className="text-5xl font-black italic tracking-tighter uppercase border-b border-zinc-900 pb-4">05_ACTIVE_MISSIONS</h2>
-          <div className="grid md:grid-cols-2 gap-8">
-            <div className="p-12 bg-zinc-950 border border-zinc-800 hover:border-green-500 transition-all">
-              <h3 className="text-3xl font-black mb-4 uppercase italic">CypherCode Académie</h3>
-              <p className="text-zinc-500 text-sm font-light italic">Branding et développement d'une communauté d'experts en sécurité offensive.</p>
-            </div>
-            <div className="p-12 bg-zinc-950 border border-zinc-800 hover:border-green-500 transition-all">
-              <h3 className="text-3xl font-black mb-4 uppercase italic">AD_Attack_Toolkit</h3>
-              <p className="text-zinc-500 text-sm font-light italic">Scripts d'énumération et d'exploitation automatisée des vecteurs Kerberos.</p>
-            </div>
-          </div>
-        </section>
-
-        {/* 6. SIGNAL (CONTACT) */}
-        <section id="contact" className="bg-zinc-950 border-2 border-green-500/20 p-12 md:p-24 rounded-lg relative overflow-hidden text-center">
-          <h2 className="text-7xl font-black italic tracking-tighter uppercase text-green-500">Establish_Signal</h2>
-          <div className="grid md:grid-cols-2 gap-6 text-[10px] font-bold tracking-[0.3em] text-zinc-500 uppercase mt-12">
-            <div className="p-6 border border-zinc-900 bg-black">aminetechtalks@gmail.com</div>
-            <div className="p-6 border border-zinc-900 bg-black">+212 701 10 31 41</div>
-          </div>
-          <form className="mt-12 space-y-4" onSubmit={(e) => e.preventDefault()}>
-            <input type="text" placeholder="SENDER_ID" className="w-full bg-black border border-zinc-800 p-6 focus:border-green-500 transition-all outline-none font-mono text-sm uppercase" />
-            <textarea rows={4} placeholder="ENCRYPTED_MESSAGE" className="w-full bg-black border border-zinc-800 p-6 focus:border-green-500 transition-all outline-none font-mono text-sm resize-none uppercase"></textarea>
-            <button className="w-full py-8 bg-green-600 text-black font-black uppercase tracking-[0.6em] hover:bg-green-400 transition-all shadow-2xl">INIT_TRANSMISSION</button>
-          </form>
-        </section>
       </main>
 
-      <footer className="py-20 text-center border-t border-zinc-900 bg-black">
-        <p className="text-[9px] text-zinc-800 tracking-[1.5em] uppercase font-black">© 2026 MOHAMED AMINE ABDELOUAFI // STATUS: SECURE</p>
+      <footer className="py-12 border-t border-white/5 text-center">
+        <p className="text-[10px] text-zinc-600 tracking-[1em] font-bold">© 2026 AMINE ABDS // SECURED_BUILD</p>
       </footer>
     </div>
   );
