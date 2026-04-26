@@ -1,11 +1,11 @@
 // src/App.tsx
-import Footer from "./components/Footer";
-import React from "react";
+import React, { useEffect } from "react"; // Added useEffect for later
 import Nav from "./components/Nav";
 import Footer from "./components/Footer";
-import "/public/assets/css/particles.css"; 
+import "/assets/css/particles.css"; // Removed /public (Vite handles this automatically)
 
 const App: React.FC = () => {
+  // Your component logic will go here
   return (
     <>
       <Nav />
