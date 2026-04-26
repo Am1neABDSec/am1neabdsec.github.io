@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 
 const App: React.FC = () => {
   useEffect(() => {
-    // High-performance counter logic
     const counters = document.querySelectorAll('[data-counter-target]');
     counters.forEach(counter => {
       const target = +counter.getAttribute('data-counter-target')!;
@@ -22,21 +21,20 @@ const App: React.FC = () => {
   }, []);
 
   return (
-    <div className="min-h-screen bg-black text-white font-sans selection:bg-green-500 selection:text-black overflow-x-hidden">
-      {/* SCANLINE EFFECT */}
-      <div className="fixed inset-0 pointer-events-none z-[9999] opacity-[0.03] bg-[linear-gradient(rgba(18,16,16,0)_50%,rgba(0,0,0,0.25)_50%),linear-gradient(90deg,rgba(255,0,0,0.06),rgba(0,255,0,0.02),rgba(0,0,255,0.06))] bg-[length:100%_2px,3px_100%]"></div>
-
-      {/* NAVIGATION */}
-      <nav className="fixed top-0 w-full z-50 bg-black/90 backdrop-blur-md border-b border-white/5 px-6 py-5">
+    <div className="min-h-screen bg-[#050505] text-white font-sans selection:bg-green-500 selection:text-black">
+      {/* AUTHENTICATION BAR */}
+      <nav className="fixed top-0 w-full z-50 bg-black/90 backdrop-blur-lg border-b border-white/5 px-8 py-5">
         <div className="max-w-7xl mx-auto flex justify-between items-center">
-          <span className="font-black tracking-tighter text-2xl uppercase italic">
-            Amine<span className="text-green-500">_Sec</span>
-          </span>
+          <div className="flex items-center gap-4">
+            <div className="h-3 w-3 bg-green-500 rounded-full animate-pulse shadow-[0_0_10px_#22c55e]"></div>
+            <span className="font-black tracking-[0.2em] text-xl uppercase italic">
+              AM1NE<span className="text-green-500">_SEC</span>
+            </span>
+          </div>
           <div className="hidden md:flex gap-10 text-[10px] font-mono tracking-[0.3em] text-zinc-500">
-            <a href="#about" className="hover:text-green-500 transition-colors">ABOUT</a>
-            <a href="#experience" className="hover:text-green-500 transition-colors">EXPERIENCE</a>
-            <a href="#credentials" className="hover:text-green-500 transition-colors">CREDENTIALS</a>
-            <a href="#contact" className="hover:text-green-500 transition-colors">CONTACT</a>
+            <a href="#exp" className="hover:text-green-500 transition-all">01_EXPERIENCE</a>
+            <a href="#certs" className="hover:text-green-500 transition-all">02_CREDENTIALS</a>
+            <a href="#contact" className="hover:text-green-500 transition-all">03_CONTACT</a>
           </div>
         </div>
       </nav>
@@ -44,157 +42,127 @@ const App: React.FC = () => {
       <main className="max-w-7xl mx-auto px-6 space-y-40 pb-32">
         
         {/* HERO SECTION */}
-        <section id="about" className="pt-48 lg:pt-64 grid lg:grid-cols-2 gap-20 items-center">
-          <div className="space-y-10">
-            <div className="inline-flex items-center gap-3 px-4 py-1 border border-green-500/30 bg-green-500/5 text-green-500 text-[10px] font-mono rounded-full uppercase tracking-widest">
-              ▸ ANALYSTE CYBERSÉCURITÉ | PENTESTER | AUDITEUR SI [cite: 1]
-            </div>
-            <h1 className="text-7xl md:text-[120px] font-black tracking-tighter leading-[0.75] uppercase italic">
-              SECURE <br/> <span className="text-green-500">INTEL.</span>
+        <section className="pt-48 lg:pt-60 grid lg:grid-cols-2 gap-16 items-center">
+          <div className="space-y-8">
+            <h1 className="text-7xl md:text-[110px] font-black tracking-tighter leading-[0.8] uppercase italic">
+              OFFENSIVE <br/> <span className="text-green-500">MINDSET.</span>
             </h1>
-            <p className="text-xl text-zinc-400 max-w-lg font-light leading-relaxed border-l-2 border-green-900 pl-8">
-              Expertise in **Active Directory Exploitation** and **Vulnerability Assessment**. [cite: 41, 43] Founder of **CypherCode Academy**, training elite security operatives. [cite: 22]
+            <p className="text-xl text-zinc-400 max-w-lg font-light leading-relaxed border-l-2 border-green-600 pl-8">
+              Cybersecurity Analyst & Pentester. Specialist in **Active Directory Exploitation** and **IoT Hardening**. Bridging the gap between code and security.
             </p>
-            <div className="flex flex-wrap gap-6">
-              <a href="#contact" className="px-12 py-6 bg-green-600 hover:bg-green-400 text-black font-black uppercase tracking-widest transition-all shadow-2xl">
-                INITIATE_MISSION
+            <div className="pt-4">
+              <a href="#contact" className="inline-block px-12 py-6 bg-green-600 hover:bg-green-400 text-black font-black uppercase tracking-widest transition-all shadow-[0_20px_50px_rgba(34,197,94,0.2)]">
+                INITIATE_CONTACT
               </a>
             </div>
           </div>
 
           <div className="relative">
             <div className="absolute -inset-10 bg-green-500/10 rounded-full blur-[120px]"></div>
-            <div className="relative rounded-3xl border border-white/10 bg-zinc-950 p-3 overflow-hidden group shadow-2xl">
+            <div className="relative border border-white/10 bg-zinc-950 p-2 rounded-2xl overflow-hidden shadow-2xl">
+              {/* THE IMAGE FIX: We use a simple path. Ensure file is named hacker.png in public folder */}
               <img 
                 src="hacker.png" 
-                alt="Amine Abdelouafi" 
-                className="w-full h-auto rounded-2xl grayscale group-hover:grayscale-0 transition-all duration-1000 object-cover"
+                alt="Amine" 
+                className="w-full h-auto rounded-xl grayscale group-hover:grayscale-0 transition-all duration-1000"
                 onError={(e) => { e.currentTarget.src = "https://img.icons8.com/ios-filled/500/22c55e/security-checked.png" }}
               />
-              <div className="absolute top-8 left-8 bg-black/80 backdrop-blur-xl px-4 py-2 border border-green-500/50 text-[10px] font-mono text-green-500 uppercase tracking-widest">
-                ID: AM1NE_ABDS_001 // {new Date().getFullYear()}
-              </div>
             </div>
           </div>
         </section>
 
-        {/* STATS */}
-        <section className="grid grid-cols-2 md:grid-cols-4 gap-8 py-20 border-y border-zinc-900 bg-zinc-950/20">
+        {/* STATS SECTION */}
+        <section className="grid grid-cols-2 md:grid-cols-4 gap-4 py-16 border-y border-zinc-900 bg-zinc-950/40">
           {[
-            { label: "EXP_YEARS", val: "20" },
-            { label: "VULNS_IDENTIFIED", val: "300" },
-            { label: "PENTESTS_DONE", val: "150" },
-            { label: "SUCCESS_RATE", val: "100" }
+            { label: "VULNS_FOUND", val: "300" },
+            { label: "PENTESTS", val: "150" },
+            { label: "YEARS_EXP", val: "20" },
+            { label: "SUCCESS", val: "100" }
           ].map((s, i) => (
-            <div key={i} className="text-center group">
-              <h2 className="text-5xl md:text-7xl font-black text-white group-hover:text-green-500 transition-colors">
-                <span data-counter-target={s.val}>0</span>{s.label === "SUCCESS_RATE" ? "%" : "+"}
+            <div key={i} className="text-center p-4">
+              <h2 className="text-5xl font-black text-green-500 font-mono italic">
+                <span data-counter-target={s.val}>0</span>{s.label === "SUCCESS" ? "%" : "+"}
               </h2>
-              <p className="text-[10px] text-zinc-500 tracking-[0.4em] mt-3 uppercase font-bold">{s.label}</p>
+              <p className="text-[10px] text-zinc-500 tracking-[0.3em] mt-2 uppercase">{s.label}</p>
             </div>
           ))}
         </section>
 
-        {/* EXPERIENCE - FROM CV */}
-        <section id="experience" className="space-y-20">
-          <h2 className="text-5xl font-black italic tracking-tighter uppercase border-b border-zinc-800 pb-6 text-green-500">Operational_Logs</h2>
-          <div className="space-y-24">
-            <div className="relative pl-12 border-l border-green-900">
-              <div className="absolute -left-[6.5px] top-0 h-3 w-3 bg-green-500 rounded-full shadow-[0_0_15px_#22c55e]"></div>
-              <span className="text-green-500 font-mono text-xs uppercase tracking-widest">Oct 2025 - Présent [cite: 6]</span>
-              <h3 className="text-4xl font-black mt-3 italic uppercase">Consultant en Cybersecurité</h3>
-              <p className="text-zinc-400 text-xl mb-8 uppercase tracking-tighter">M-SECURE CONSULTING [cite: 4]</p>
-              <ul className="grid md:grid-cols-2 gap-6 text-sm text-zinc-500 font-mono italic">
-                <li className="flex items-start gap-3">
-                  <span className="text-green-500">▸</span> Énumération & Reconnaissance (Nmap, Nessus, Gobuster) [cite: 7]
-                </li>
-                <li className="flex items-start gap-3">
-                  <span className="text-green-500">▸</span> Active Directory Exploitation (Kerberoasting, SMB Relay) [cite: 8]
-                </li>
-                <li className="flex items-start gap-3">
-                  <span className="text-green-500">▸</span> Vulnerability Assessment & Impact Demonstration [cite: 9]
-                </li>
-                <li className="flex items-start gap-3">
-                  <span className="text-green-500">▸</span> Rédaction de rapports stratégiques [cite: 11]
-                </li>
+        {/* EXPERIENCE - DATA FROM CV */}
+        <section id="exp" className="space-y-16">
+          <h2 className="text-4xl font-black italic tracking-tighter uppercase border-b border-zinc-800 pb-4 text-green-500">Operational_Logs</h2>
+          <div className="space-y-12">
+            <div className="group p-10 bg-zinc-950 border border-zinc-900 hover:border-green-500/50 transition-all">
+              <div className="flex flex-col md:flex-row justify-between mb-6">
+                <div>
+                  <h3 className="text-3xl font-black italic uppercase">Consultant en Cybersecurité</h3>
+                  <p className="text-green-500 font-mono text-sm tracking-widest mt-1">M-SECURE CONSULTING | OCT 2025 - PRESENT</p>
+                </div>
+              </div>
+              <ul className="grid md:grid-cols-2 gap-4 text-sm text-zinc-400 font-mono italic">
+                <li>▸ Active Directory Attacks (Kerberoasting)</li>
+                <li>▸ Vulnerability Assessment & Reporting</li>
+                <li>▸ Infrastructure Mapping (Nmap, Nessus)</li>
+                <li>▸ IoT Device Hardening</li>
               </ul>
             </div>
 
-            <div className="relative pl-12 border-l border-zinc-800">
-              <div className="absolute -left-[6.5px] top-0 h-3 w-3 bg-zinc-700 rounded-full"></div>
-              <span className="text-zinc-500 font-mono text-xs uppercase tracking-widest">Mai 2025 - Oct 2025 [cite: 13]</span>
-              <h3 className="text-4xl font-black mt-3 italic uppercase text-zinc-300">Tech Support L2</h3>
-              <p className="text-zinc-500 text-xl mb-4">TELUS Digital [cite: 12]</p>
-              <p className="text-sm text-zinc-500 max-w-3xl leading-relaxed italic">
-                Sécurisation IoT, configuration de dispositifs intelligents (caméras IP, serrures connectées) et troubleshooting réseau avancé. [cite: 14, 15]
+            <div className="group p-10 bg-zinc-950 border border-zinc-900 hover:border-white/20 transition-all">
+              <h3 className="text-3xl font-black italic uppercase text-zinc-300">Tech Support L2</h3>
+              <p className="text-zinc-500 font-mono text-sm tracking-widest mt-1 uppercase">TELUS Digital | MAY 2025 - OCT 2025</p>
+              <p className="mt-4 text-zinc-500 max-w-3xl text-sm italic">
+                Advanced troubleshooting for smart home security systems, IP cameras, and network infrastructure stabilization.
               </p>
             </div>
           </div>
         </section>
 
-        {/* CREDENTIALS - FROM CV */}
-        <section id="credentials" className="grid lg:grid-cols-2 gap-20">
-          <div className="space-y-12">
-            <h2 className="text-3xl font-black uppercase text-green-500 tracking-widest border-l-4 border-green-500 pl-6">Certifications</h2>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-              {[
-                { n: "PJPT", o: "TCM Security" },
-                { n: "CompTIA Security+", o: "CompTIA" },
-                { n: "Fortinet NSE 3", o: "Fortinet" }
-              ].map((c, i) => (
-                <div key={i} className="p-8 bg-zinc-950 border border-zinc-900 hover:border-green-500/40 transition-all group">
-                  <h4 className="text-2xl font-black italic group-hover:text-green-500 transition-colors">{c.n}</h4>
-                  <p className="text-zinc-500 text-[10px] font-mono mt-2 uppercase tracking-widest">{c.o}</p>
+        {/* CERTIFICATIONS & ACADEMICS */}
+        <section id="certs" className="grid lg:grid-cols-2 gap-16">
+          <div className="space-y-10">
+            <h2 className="text-3xl font-black uppercase text-green-500 tracking-tighter">Verified_Certs</h2>
+            <div className="space-y-4">
+              {["PJPT (TCM Security)", "CompTIA Security+", "Fortinet NSE 3"].map((cert, i) => (
+                <div key={i} className="p-6 bg-zinc-950 border border-zinc-900 flex justify-between items-center group hover:bg-zinc-900 transition-all">
+                  <span className="font-bold italic text-lg">{cert}</span>
+                  <span className="text-green-500 opacity-0 group-hover:opacity-100 transition-opacity">VALIDATED</span>
                 </div>
               ))}
             </div>
           </div>
-          <div className="space-y-12">
-            <h2 className="text-3xl font-black uppercase text-white tracking-widest border-l-4 border-white pl-6">Education</h2>
-            <div className="space-y-8">
-              <div className="p-8 bg-zinc-950 border-r-4 border-green-500">
-                <h4 className="text-xl font-bold uppercase italic">Licence Professionnelle RSS</h4>
-                <p className="text-zinc-500 text-xs font-mono mt-3 uppercase tracking-widest">AUPS Maroc | 2025 - 2026 [cite: 46]</p>
-              </div>
-              <div className="p-8 bg-zinc-950 border-r-4 border-zinc-800 opacity-50">
-                <h4 className="text-xl font-bold uppercase italic italic">Licence en gestion</h4>
-                <p className="text-zinc-500 text-xs font-mono mt-3 uppercase tracking-widest">FSJES Ain Chock | 2023 - 2026 [cite: 47]</p>
-              </div>
+          <div className="space-y-10">
+            <h2 className="text-3xl font-black uppercase text-white tracking-tighter">Education</h2>
+            <div className="p-8 bg-zinc-950 border-r-4 border-green-600">
+              <h4 className="text-xl font-bold italic">Licence Professionnelle RSS</h4>
+              <p className="text-zinc-500 text-sm mt-2 font-mono uppercase tracking-widest">AUPS Maroc | 2025-2026</p>
             </div>
           </div>
         </section>
 
-        {/* CONTACT SECTION */}
-        <section id="contact" className="py-32 bg-green-600 rounded-[50px] text-black overflow-hidden relative shadow-[0_0_50px_rgba(34,197,94,0.4)]">
-          <div className="absolute top-0 right-0 p-12 opacity-10 text-[200px] font-black italic select-none pointer-events-none">DATA</div>
-          <div className="max-w-4xl mx-auto px-6 text-center relative z-10">
-            <h2 className="text-7xl md:text-9xl font-black tracking-tighter italic uppercase mb-8">CONTACT_ME</h2>
-            <div className="grid md:grid-cols-2 gap-10 mb-16 text-left font-mono font-bold uppercase text-xs tracking-widest">
-               <div className="p-6 border-2 border-black/10 rounded-3xl">
-                  EMAIL: aminetechtalks@gmail.com [cite: 1]
-               </div>
-               <div className="p-6 border-2 border-black/10 rounded-3xl">
-                  TEL: +212 701 10 31 41 [cite: 2]
-               </div>
-            </div>
-            <form className="space-y-6 text-left" onSubmit={(e) => e.preventDefault()}>
-              <div className="grid md:grid-cols-2 gap-6">
-                <input type="text" placeholder="SUBJECT_ID" className="w-full bg-black/5 border-2 border-black/10 p-6 rounded-3xl outline-none placeholder:text-black/40 font-mono text-sm focus:bg-white/20 transition-all" />
-                <input type="email" placeholder="SECURE_EMAIL" className="w-full bg-black/5 border-2 border-black/10 p-6 rounded-3xl outline-none placeholder:text-black/40 font-mono text-sm focus:bg-white/20 transition-all" />
+        {/* CONTACT */}
+        <section id="contact" className="py-24 bg-green-600 rounded-2xl text-black">
+          <div className="max-w-3xl mx-auto px-6 text-center">
+            <h2 className="text-6xl md:text-8xl font-black italic tracking-tighter uppercase mb-6">TRANSMIT_DATA</h2>
+            <p className="text-black/70 mb-12 font-mono text-xs font-bold uppercase tracking-widest">
+              aminetechtalks@gmail.com // +212 701 10 31 41
+            </p>
+            <form className="grid gap-4 text-left" onSubmit={(e) => e.preventDefault()}>
+              <div className="grid md:grid-cols-2 gap-4">
+                <input type="text" placeholder="SENDER_ID" className="w-full bg-white/10 border border-black/10 p-5 rounded-xl outline-none placeholder:text-black/40 font-mono text-sm" />
+                <input type="email" placeholder="SECURE_EMAIL" className="w-full bg-white/10 border border-black/10 p-5 rounded-xl outline-none placeholder:text-black/40 font-mono text-sm" />
               </div>
-              <textarea rows={5} placeholder="MISSION_DESCRIPTION" className="w-full bg-black/5 border-2 border-black/10 p-6 rounded-3xl outline-none placeholder:text-black/40 font-mono text-sm focus:bg-white/20 transition-all resize-none"></textarea>
-              <button className="w-full py-8 bg-black text-green-500 font-black uppercase tracking-[0.5em] hover:scale-[1.02] active:scale-95 transition-all shadow-2xl">
-                TRANSMIT_SIGNAL
+              <textarea rows={4} placeholder="MISSION_DESCRIPTION" className="w-full bg-white/10 border border-black/10 p-5 rounded-xl outline-none placeholder:text-black/40 font-mono text-sm resize-none"></textarea>
+              <button className="w-full py-6 bg-black text-green-500 font-black uppercase tracking-[0.4em] hover:bg-zinc-900 transition-all shadow-2xl">
+                SEND_ENCRYPTED_SIGNAL
               </button>
             </form>
           </div>
         </section>
-
       </main>
 
-      <footer className="py-20 border-t border-zinc-900 text-center bg-zinc-950">
+      <footer className="py-20 border-t border-zinc-900 text-center">
         <p className="text-zinc-600 text-[10px] font-mono tracking-[0.5em] uppercase">
-          © {new Date().getFullYear()} MOHAMED AMINE ABDELOUAFI // AM1NEABDSec [cite: 1]
+          © 2026 MOHAMED AMINE ABDELOUAFI // SECURITY ANALYST
         </p>
       </footer>
     </div>
